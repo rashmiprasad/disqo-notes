@@ -1,22 +1,19 @@
 package com.disqo.persistence.model;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import org.joda.time.DateTime;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by rashmiprasad on 5/21/20.
@@ -37,8 +34,8 @@ public class User {
     @NotNull
     private String password;
 
-//    private DateTime createdDateTime;
-//    private DateTime updatedDateTime;
+    private Timestamp createdDateTime;
+    private Timestamp updatedDateTime;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Note> notes = new HashSet<>();
@@ -75,19 +72,19 @@ public class User {
         this.notes = notes;
     }
 
-    //    public DateTime getCreatedDateTime() {
-//        return createdDateTime;
-//    }
-//
-//    public void setCreatedDateTime(DateTime createdDateTime) {
-//        this.createdDateTime = createdDateTime;
-//    }
-//
-//    public DateTime getUpdatedDateTime() {
-//        return updatedDateTime;
-//    }
-//
-//    public void setUpdatedDateTime(DateTime updatedDateTime) {
-//        this.updatedDateTime = updatedDateTime;
-//    }
+    public Timestamp getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(Timestamp createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public Timestamp getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(Timestamp updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
 }

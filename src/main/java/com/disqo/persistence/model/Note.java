@@ -1,20 +1,24 @@
 package com.disqo.persistence.model;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import org.joda.time.DateTime;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+
 
 /**
  * Created by rashmiprasad on 5/21/20.
@@ -30,11 +34,13 @@ public class Note implements Serializable {
     private Long id;
 
     @NotNull
+    @Size(min = 1, max = 50)
     private String title;
 
+    @Size(max = 1000)
     private String note;
-//    private DateTime createdDateTime;
-//    private DateTime updatedDateTime;
+    private Timestamp createdDateTime;
+    private Timestamp updatedDateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
@@ -75,21 +81,21 @@ public class Note implements Serializable {
         this.user = user;
     }
 
-    //    public DateTime getCreatedDateTime() {
-//        return createdDateTime;
-//    }
-//
-//    public void setCreatedDateTime(DateTime createdDateTime) {
-//        this.createdDateTime = createdDateTime;
-//    }
-//
-//    public DateTime getUpdatedDateTime() {
-//        return updatedDateTime;
-//    }
-//
-//    public void setUpdatedDateTime(DateTime updatedDateTime) {
-//        this.updatedDateTime = updatedDateTime;
-//    }
+    public Timestamp getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(Timestamp createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public Timestamp getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(Timestamp updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
 
     @Override
     public String toString() {
@@ -97,8 +103,8 @@ public class Note implements Serializable {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", note='" + note + '\'' +
-//                ", createdDateTime=" + createdDateTime +
-//                ", updatedDateTime=" + updatedDateTime +
+                ", createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
                 '}';
     }
 }
