@@ -3,15 +3,16 @@ package com.disqo.controller;
 import com.disqo.persistence.model.Note;
 import com.disqo.service.NoteService;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 
 
 @RestController
@@ -20,7 +21,7 @@ public class NotesController {
     @Autowired
     private NoteService noteService;
 
-    @RequestMapping(value = "/{userId}/note", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/{userId}/note", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Note createNewNote(@PathVariable(value = "userId") Long userId, @RequestBody Note note)
             throws Exception {
         return noteService.addNote(userId, note);
